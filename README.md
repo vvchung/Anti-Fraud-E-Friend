@@ -41,8 +41,10 @@
 
 | 🛡️ 震撼首頁 | 💬 智能諮詢 |
 |:---:|:---:|
-| ![Home Demo](images/home_demo.png) | ![Chat Demo](images/chat_demo.png) |
+| ![Home Demo](images/chat_demo.png) | ![Method Demo](images/method_demo.png) |
 | *直覺、現代化的入口* | *Gemini 2.5 即時分析* |
+
+> *（請將截圖放入 `images/` 資料夾以顯示圖片）*
 
 ---
 
@@ -62,7 +64,7 @@
 這裡有您在自家電腦上運行 App 所需的一切寶貝！
 
 👀 **在 AI Studio 瞧瞧您的 App：** 
-[https://ai.studio/apps/drive/11wfoJlccGnmaqc4ilfclNHW-cYAZxxMV?fullscreenApplet=true](https://ai.studio/apps/drive/11wfoJlccGnmaqc4ilfclNHW-cYAZxxMV?fullscreenApplet=true)
+[https://ai.studio/apps/drive/1ZoPjO1Dx4iW82YMP8dVWZJfMTLB5EEDR?fullscreenApplet=true](https://ai.studio/apps/drive/1ZoPjO1Dx4iW82YMP8dVWZJfMTLB5EEDR?fullscreenApplet=true)
 <img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
 
 ### 💻 30秒在本機端運行極速啟動 (Quick Start)
