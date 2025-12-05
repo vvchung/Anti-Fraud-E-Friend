@@ -44,8 +44,6 @@
 | ![Home Demo](images/home_demo.png) | ![Chat Demo](images/chat_demo.png) |
 | *直覺、現代化的入口* | *Gemini 2.5 即時分析* |
 
-> *（請將截圖放入 `images/` 資料夾以顯示圖片）*
-
 ---
 
 ## ⚡ 技術軍火庫 (Tech Stack)
