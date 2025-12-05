@@ -65,7 +65,7 @@
 [https://ai.studio/apps/drive/1ZoPjO1Dx4iW82YMP8dVWZJfMTLB5EEDR?fullscreenApplet=true](https://ai.studio/apps/drive/1ZoPjO1Dx4iW82YMP8dVWZJfMTLB5EEDR?fullscreenApplet=true)
 <img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
 
-### 💻 30秒在本機端運行極速啟動 (Quick Start)
+### 💻 30秒在本機端極速啟動 (Quick Start)
 
 不要猶豫，現在就加入防詐的行列！
 
