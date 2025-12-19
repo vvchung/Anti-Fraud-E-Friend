@@ -59,6 +59,10 @@ We speak your language! Access support in:
 
 ## 🚀 Get Started (立即開始)
 
+👀 **View your App on AI Studio:** 
+[https://ai.studio/apps/drive/1ZoPjO1Dx4iW82YMP8dVWZJfMTLB5EEDR?fullscreenApplet=true](https://ai.studio/apps/drive/1ZoPjO1Dx4iW82YMP8dVWZJfMTLB5EEDR?fullscreenApplet=true)
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+
 1.  **Select Your Language**: Use the globe icon in the top right.
 2.  **Paste & Analyze**: Copy any suspicious text into the chat.
 3.  **Take Action**: Follow the AI's guide or call **165** immediately if you've shared personal info.
