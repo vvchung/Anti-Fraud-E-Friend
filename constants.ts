@@ -1,94 +1,147 @@
-import { FraudMethod, QuizQuestion } from './types';
 
-export const SYSTEM_INSTRUCTION = `
-You are "防詐E友" (Anti-Fraud E-Friend), a warm, empathetic, and highly knowledgeable AI assistant dedicated to preventing fraud in Taiwan.
-Your personality is like a sharp-witted but caring friend. You are patient with victims and stern with scammers.
+import { FraudMethod, QuizQuestion, Language } from './types';
 
-Knowledge Base (based on 165 dashboard common types):
-1. **假投資 (Fake Investment):** Scammers add victims to Line groups, claim "guaranteed profits," use fake apps/websites showing fake earnings.
-2. **解除分期付款 (Cancel Installment):** Pretending to be customer service (Shopee, MOMO) claiming a setting error caused repeat charges. Ask user to operate ATM/Online Banking.
-3. **假網拍 (Fake Online Shopping):** Items significantly below market price, require private messaging (Line) for transaction, no shipment after payment.
-4. **假交友 (Romance Scam):** Profiles of handsome/beautiful successful people, build emotional connection, then ask for money for "emergency," "investment," or "meeting up."
-5. **假檢警 (Fake Police/Prosecutor):** Claim victim is involved in money laundering, require "account monitoring" or handing over cash/cards to a "court official."
-6. **猜猜我是誰 (Guess Who I Am):** Pretend to be a relative/friend with a new number, asking for emergency money.
+export const GET_SYSTEM_INSTRUCTION = (lang: Language) => `
+You are "防詐E友" (Anti-Fraud E-Friend), a professional yet warm AI assistant for international students and residents in Taiwan.
+Your primary mission is to protect them from local fraud. 
+Target Language: ${lang}. ALWAYS respond in this language.
 
-Your Tasks:
-- **Analyze Scenarios:** If a user pastes a message, analyze if it's a scam based on keywords (ATM, Line ID, Guaranteed Profit).
-- **Emotional Support:** If a user has been scammed, be comforting. Do not blame them. Guide them to call 165 or 110.
-- **Roleplay:** If the user asks to practice, you can play the role of a scammer to help them train their "saying no" skills.
-- **Style:** Use Traditional Chinese (zh-TW). Be concise but detailed when analyzing. Use emojis to be friendly.
+OUTPUT FORMATTING RULES (CRITICAL for readability):
+1. Use **bold text** for important warnings or key terms.
+2. Use bullet points or numbered lists for steps/indicators.
+3. Use clear section headers like "🚨 Risk Analysis", "✅ Action Plan", or "💡 Pro Tips".
+4. Add a blank line between paragraphs.
+5. Keep paragraphs short (max 3 sentences).
 
-Strict Rule: NEVER ask for real personal financial information. If a user shares sensitive data, tell them to delete it immediately.
+Knowledge Base (Taiwan context):
+- Fake Investment: Line groups, "guaranteed profits," fake trading apps.
+- Installment/ATM Scam: Calls from "Shopee/MOMO" claiming billing errors, asking to use ATM for "cancellation."
+- ARC/Visa Scams: Impersonating Immigration or Police claiming issues with residency status.
+- Overseas Remittance: Scammers asking for money via Western Union or crypto for "emergencies."
+
+Behavior:
+- Analyze messages for red flags (ATM, Line ID, urgency, "official" requests over social media).
+- Be supportive. Explain that Taiwan Police/Courts NEVER ask for money via phone.
+- If they are a victim, guide them to call 165 (Anti-fraud) or 110 (Police).
 `;
 
 export const FRAUD_METHODS: FraudMethod[] = [
   {
     id: 'investment',
-    title: '假投資詐騙',
-    category: '高發詐欺',
-    description: '詐騙集團透過簡訊、臉書、IG投放廣告，以「穩賺不賠」、「高獲利」話術，邀請加入LINE群組。初期可能讓受害者小額獲利，待投入大筆資金後，即封鎖消失。',
-    indicators: ['標榜穩賺不賠', '要求加入LINE群組', '使用不明投資網站/APP', '要求匯款至個人帳戶'],
-    prevention: ['不聽信來源不明資訊', '不加陌生投資群組', '使用合法交易管道', '撥打165查證'],
+    title: { 'zh-TW': '假投資詐騙', 'en': 'Fake Investment', 'zh-CN': '假投资诈骗', 'ja': '投資詐欺', 'ko': '투자 사기', 'vi': 'Lừa đảo đầu tư giả', 'id': 'Penipuan Investasi Palsu', 'th': 'กลโกงลงทุนปลอม', 'hi': 'फर्जी निवेश' },
+    category: { 'zh-TW': '高發詐欺', 'en': 'High Risk', 'zh-CN': '高发诈骗', 'ja': 'ハイリスク', 'ko': '고위험', 'vi': 'Rủi ro cao', 'id': 'Risiko Tinggi', 'th': 'ความเสี่ยงสูง', 'hi': 'उच्च जोखिम' },
+    description: {
+      'zh-TW': '透過社群媒體投放廣告，以「穩賺不賠」誘使加入 LINE 群組並投入資金。',
+      'en': 'Social media ads promising "guaranteed profits" leading to private Line groups for investment.',
+      'zh-CN': '通过社群媒体投放广告，以“稳赚不赔”诱使加入 LINE 群组并投入資金。',
+      'ja': 'SNS広告で「確実な利益」を謳い、LINEグループへ誘導して投資を促します。',
+      'ko': 'SNS 광고를 통해 "확실한 수익"을 약속하며 LINE 그룹으로 유도합니다.',
+      'vi': 'Quảng cáo trên mạng xã hội hứa hẹn "lợi nhuận đảm bảo" để dụ dỗ vào các nhóm LINE.',
+      'id': 'Iklan media sosial menjanjikan "keuntungan pasti" yang mengarah ke grup Line pribadi.',
+      'th': 'โฆษณาโซเชียลมีเดียที่รับประกัน "กำไรที่มั่นคง" ล่อลวงให้เข้ากลุ่ม LINE',
+      'hi': 'सोशल मीडिया विज्ञापनों द्वारा "गारंटीड मुनाफे" का लालच देकर निवेश समूहों में शामिल करना।'
+    },
+    indicators: {
+      'zh-TW': ['穩賺不賠', '加入LINE群組', '不明APP'],
+      'en': ['Guaranteed profit', 'Join Line group', 'Unknown apps'],
+      'zh-CN': ['稳赚不赔', '加入LINE群组', '不明APP'],
+      'ja': ['確実な利益', 'LINEグループ', '不明なアプリ'],
+      'ko': ['수익 보장', 'LINE 그룹 가입', '출처 불명 앱'],
+      'vi': ['Lợi nhuận đảm bảo', 'Tham gia nhóm LINE', 'Ứng dụng lạ'],
+      'id': ['Untung pasti', 'Grup Line', 'Aplikasi asing'],
+      'th': ['รับประกันกำไร', 'เข้ากลุ่ม LINE', 'แอปนิรนาม'],
+      'hi': ['गारंटीड मुनाफा', 'LINE ग्रुप जॉइन करें', 'अज्ञात ऐप']
+    },
+    prevention: {
+      'zh-TW': ['不進投資群組', '使用合法管道'],
+      'en': ['Avoid unknown groups', 'Use legal platforms'],
+      'zh-CN': ['不进投资群组', '使用合法渠道'],
+      'ja': ['不明なグループに入らない', '正規の窓口を利用'],
+      'ko': ['투자 단톡방 금지', '정식 거래소 이용'],
+      'vi': ['Không vào nhóm lạ', 'Dùng sàn chính thống'],
+      'id': ['Hindari grup asing', 'Gunakan platform legal'],
+      'th': ['ไม่เข้ากลุ่มลงทุน', 'ใช้ช่องทางที่ถูกกฎหมาย'],
+      'hi': ['अज्ञात समूहों से बचें', 'कानूनी प्लेटफॉर्म का उपयोग करें']
+    },
     icon: 'chart-line'
   },
   {
     id: 'atm',
-    title: '解除分期付款',
-    category: '高發詐欺',
-    description: '冒充電商或銀行客服，謊稱訂單設定錯誤（如重複扣款、升級高級會員），要求民眾操作ATM或網銀來「解除設定」。',
-    indicators: ['+號開頭來電', '要求操作ATM/網銀', '聽到「解除設定」關鍵字', '購買遊戲點數'],
-    prevention: ['ATM無法解除設定', '掛斷電話，自行撥打官方客服查證', '不透露帳戶密碼'],
+    title: { 'zh-TW': '解除分期付款', 'en': 'ATM Installment Scam', 'zh-CN': '解除分期付款', 'ja': 'ATM分割払い解除詐欺', 'ko': 'ATM 할부 해제 사기', 'vi': 'Lừa đảo thanh toán trả góp', 'id': 'Penipuan Cicilan ATM', 'th': 'กลโกงผ่อนชำระ ATM', 'hi': 'एटीएम किस्त धोखाधड़ी' },
+    category: { 'zh-TW': '高發詐欺', 'en': 'High Risk', 'zh-CN': '高发诈骗', 'ja': 'ハイリスク', 'ko': '고위험', 'vi': 'Rủi ro cao', 'id': 'Risiko Tinggi', 'th': 'ความเสี่ยงสูง', 'hi': 'उच्च जोखिम' },
+    description: {
+      'zh-TW': '冒充網購客服，稱訂單設定錯誤，要求去 ATM 操作「解除」。',
+      'en': 'Impersonating customer service, claiming a billing error and asking you to use an ATM to "fix" it.',
+      'zh-CN': '冒充网购客服，称订单设定错误，要求去 ATM 操作“解除”。',
+      'ja': 'ネットショップを装い、「設定ミス」を理由にATM操作を要求します。',
+      'ko': '쇼핑몰 고객센터 사칭, 설정 오류를 핑계로 ATM 조작을 요구합니다.',
+      'vi': 'Mạo danh CSKH, báo lỗi đơn hàng và yêu cầu ra ATM để "hủy".',
+      'id': 'Menyamar sebagai CS toko online, mengklaim kesalahan tagihan dan meminta Anda ke ATM.',
+      'th': 'อ้างว่าเป็นพนักงานบริการลูกค้า อ้างว่าออเดอร์ผิดพลาดและให้ไปที่ตู้ ATM',
+      'hi': 'कस्टमर सर्विस बनकर बिलिंग त्रुटि का दावा करना और "ठीक" करने के लिए एटीएम उपयोग करने को कहना।'
+    },
+    indicators: {
+      'zh-TW': ['操作ATM', '解除設定', '重複扣款'],
+      'en': ['Operate ATM', 'Cancel setting', 'Duplicate charge'],
+      'zh-CN': ['操作ATM', '解除设定', '重复扣款'],
+      'ja': ['ATM操作', '設定解除', '二重請求'],
+      'ko': ['ATM 조작', '설정 해제', '중복 결제'],
+      'vi': ['Thao tác ATM', 'Hủy cài đặt', 'Trừ tiền 2 lần'],
+      'id': ['Operasikan ATM', 'Batalkan setelan', 'Tagihan ganda'],
+      'th': ['ไปที่ตู้ ATM', 'ยกเลิกการตั้งค่า', 'หักเงินซ้ำ'],
+      'hi': ['एटीएम का उपयोग', 'सेटिंग रद्द करना', 'दोहरा शुल्क']
+    },
+    prevention: {
+      'zh-TW': ['ATM無解除功能', '掛斷查證'],
+      'en': ['ATMs cannot cancel settings', 'Hang up and verify'],
+      'zh-CN': ['ATM无解除功能', '挂断查证'],
+      'ja': ['ATMで設定解除は不可', '電話を切って確認'],
+      'ko': ['ATM은 해제 기능 없음', '전화 끊고 직접 확인'],
+      'vi': ['ATM không có nút hủy', 'Cúp máy xác minh'],
+      'id': ['ATM tidak bisa batal setelan', 'Tutup & verifikasi'],
+      'th': ['ATM ยกเลิกไม่ได้', 'วางสายและตรวจสอบ'],
+      'hi': ['एटीएम से設定 रद्द नहीं होती', 'फोन काटें और जांचें']
+    },
     icon: 'credit-card'
-  },
-  {
-    id: 'love',
-    title: '假交友(殺豬盤)',
-    category: '情感詐欺',
-    description: '透過交友軟體認識，盜用帥哥美女照。建立感情後，以「為了我們未來」、「緊急借錢」、「投資獲利」為由要求匯款。',
-    indicators: ['沒見過面就談錢', '自稱外國軍官/醫生/富商', '拒絕視訊通話', '情緒勒索'],
-    prevention: ['網路交友談錢必有詐', '善用以圖搜圖', '堅持見面確認身分'],
-    icon: 'heart-crack'
-  },
-  {
-    id: 'shopping',
-    title: '假網拍/一頁式廣告',
-    category: '消費詐欺',
-    description: '商品價格遠低於市價，強調「限時搶購」、「貨到付款」。收到的商品常是假貨或與廣告不符，且求償無門。',
-    indicators: ['售價低於行情太多', '網頁粗糙、只有單一頁面', '沒有公司地址電話', '只能用LINE聯繫'],
-    prevention: ['選擇有第三方支付平台', '避免私下交易', '確認賣家商譽'],
-    icon: 'shopping-bag'
-  },
-  {
-    id: 'impersonate',
-    title: '假檢警/公務員',
-    category: '權力詐欺',
-    description: '冒充檢察官或警察，指稱民眾帳戶涉及洗錢或刑案，要求「監管帳戶」或面交現金給「法院專員」。',
-    indicators: ['偵查不公開', '要求監管帳戶', '傳真/Line傳送公文', '禁止掛斷電話'],
-    prevention: ['檢警不會要求匯款', '不聽從電話指示製作筆錄', '直接掛斷並撥打110'],
-    icon: 'siren'
   }
 ];
 
 export const QUIZ_DATA: QuizQuestion[] = [
   {
     id: 1,
-    scenario: "接到電話自稱是 Shopee 客服，說您的訂單因為系統錯誤被重複扣款 12 次，需要您去 ATM 解除設定。",
-    options: ["趕快去 ATM 照做以免損失", "提供銀行帳號給對方查詢", "掛斷電話，直接撥打 165 或官方客服求證", "罵對方一頓"],
-    correctIndex: 2,
-    explanation: "這是標準的「解除分期付款」詐騙。ATM 只有提款和轉帳功能，無法解除任何設定。"
-  },
-  {
-    id: 2,
-    scenario: "在 Instagram 看到廣告「在家工作，輕鬆按讚就能日領 2000 元」，加入 Line 後對方要求先匯款「保證金」。",
-    options: ["小額匯款試試看", "這是求職詐騙，拒絕並封鎖", "詢問是否有勞健保", "介紹朋友一起賺"],
+    scenario: {
+      'zh-TW': '接到電話自稱是 Shopee 客服，說您的訂單重複扣款，需要去 ATM 解除設定。',
+      'en': 'You get a call from "Shopee Support" saying your order was double-charged and you need to use an ATM to fix it.',
+      'zh-CN': '接到电话自称是 Shopee 客服，说您的订单重复扣款，需要去 ATM 解除设定。',
+      'ja': 'Shopeeを名乗る電話があり、二重請求されたのでATMで解除してほしいと言われました。',
+      'ko': 'Shopee 상담원이라며 중복 결제되었으니 ATM에서 취소하라는 전화를 받았습니다.',
+      'vi': 'Có cuộc gọi xưng là Shopee bảo đơn bị trừ tiền 2 lần, yêu cầu ra ATM để xử lý.',
+      'id': 'Anda ditelepon "Shopee Support" yang bilang pesanan Anda ditagih dua kali dan harus ke ATM.',
+      'th': 'มีโทรศัพท์อ้างว่าเป็น Shopee บอกว่าคุณถูกหักเงินซ้ำ และให้ไปที่ตู้ ATM เพื่อแก้ไข',
+      'hi': 'आपको "Shopee सपोर्ट" से कॉल आता है कि आपके ऑर्डर का दोहरा शुल्क लिया गया है और इसे ठीक करने के लिए एटीएम जाना होगा।'
+    },
+    options: {
+      'zh-TW': ['去ATM照做', '掛斷求證', '提供卡號'],
+      'en': ['Follow instructions at ATM', 'Hang up and verify', 'Give card details'],
+      'zh-CN': ['去ATM照做', '挂断求证', '提供卡号'],
+      'ja': ['ATMへ行く', '電話を切って確認', 'カード番号を教える'],
+      'ko': ['ATM으로 간다', '끊고 직접 확인', '카드번호 제공'],
+      'vi': ['Ra ATM làm theo', 'Cúp máy xác minh', 'Cung cấp số thẻ'],
+      'id': ['Ikuti instruksi di ATM', 'Tutup & verifikasi', 'Beri nomor kartu'],
+      'th': ['ไปที่ตู้ ATM', 'วางสายและตรวจสอบ', 'ให้เลขบัตร'],
+      'hi': ['एटीएम पर निर्देश मानें', 'फोन काटें और जांचें', 'कार्ड विवरण दें']
+    },
     correctIndex: 1,
-    explanation: "這是「假求職/假兼職」詐騙。合法的徵才不會要求求職者先支付保證金、材料費或訓練費。"
-  },
-  {
-    id: 3,
-    scenario: "網路上認識的「戰地軍醫」男友寄包裹給你，但海關說需要支付一筆「通關費」才能放行。",
-    options: ["匯款救急，因為是真愛", "請他自己想辦法", "這是假交友詐騙，千萬別匯款", "跟親友借錢匯款"],
-    correctIndex: 2,
-    explanation: "這是典型的「假交友」詐騙（殺豬盤）。詐騙集團常利用寄送禮物卡關、生病等理由要求匯款。"
+    explanation: {
+      'zh-TW': 'ATM 無解除設定功能，這絕對是詐騙。',
+      'en': 'ATMs cannot cancel settings. This is a 100% scam.',
+      'zh-CN': 'ATM 无解除设定功能，這绝对是诈骗。',
+      'ja': 'ATMに設定解除機能はありません。間違いなく詐欺です。',
+      'ko': 'ATM에는 취소 기능이 없습니다. 명백한 사기입니다.',
+      'vi': 'ATM không có chức năng hủy cài đặt. Chắc chắn là lừa đảo.',
+      'id': 'ATM tidak punya fitur batal setelan. Ini pasti penipuan.',
+      'th': 'ตู้ ATM ไม่มีฟังก์ชันยกเลิก นี่คือการโกงแน่นอน',
+      'hi': 'एटीएम में सेटिंग रद्द करने का कोई विकल्प नहीं होता। यह धोखाधड़ी है।'
+    }
   }
 ];

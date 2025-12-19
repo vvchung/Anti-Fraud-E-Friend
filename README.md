@@ -1,103 +1,85 @@
-# 🛡️ 防詐 E 友 (Anti-Fraud E-Friend)
 
-> **💥 詐騙退散！在這個數位叢林中，你需要最強的 AI 保鑣！**  
-> **The Ultimate AI Guardian Against Digital Fraud.**
+# 🛡️ 防詐 E 友 | Anti-Fraud E-Friend (24/7 AI Guardian)
 
-![React](https://img.shields.io/badge/React-19-61DAFB.svg?logo=react&logoColor=black)
-![Gemini](https://img.shields.io/badge/Brain-Gemini%202.5-8E75B2.svg?logo=google-gemini&logoColor=white)
-![Tailwind](https://img.shields.io/badge/Style-Tailwind-38B2AC.svg?logo=tailwindcss&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-blue.svg)
+> **"New to Taiwan? Don't let scams ruin your journey. We are here for you 24/7."**  
+> **「剛到台灣嗎？別讓詐騙破壞你的旅程。防詐 E 友 24 小時守護你。」**
 
----
-
-## 🚨 為什麼你需要這個專案？ (The Why)
-
-在這個詐騙手法比病毒變種還快的時代，「猜猜我是誰」、「穩賺不賠」、「解除分期付款」的劇本層出不窮。
-
-**我們受夠了！** 😡
-
-**防詐 E 友** 結合了 **Google 最新的 Gemini 2.5 Flash** 模型與 **165 反詐騙資料庫**，打造出一位 24 小時待命、具備高智商與同理心的數位保鑣。這不只是一個 Chatbot，這是守護你我財產的最後一道防線！
+[![React](https://img.shields.io/badge/Frontend-React%2019-61DAFB.svg?logo=react&logoColor=black)](https://react.dev/)
+[![Gemini](https://img.shields.io/badge/AI-Gemini%202.5%20Flash-8E75B2.svg?logo=google-gemini&logoColor=white)](https://deepmind.google/technologies/gemini/)
+[![Taiwan 165](https://img.shields.io/badge/Data-165%20Anti--Fraud-red.svg)](https://165.npa.gov.tw/)
+[![Languages](https://img.shields.io/badge/Support-9%20Languages-blue.svg)](#-multi-language-support)
 
 ---
 
-## 🔥 核心戰力 (Features)
+## 🌟 Your 24/7 Safe Space in Taiwan (為什麼選擇防詐 E 友？)
 
-### 🧠 1. 極速 AI 識詐 (AI Detection)
-搭載 **Gemini 2.5 Flash**，擁有超低延遲與強大的語意理解力。
-*   複製貼上可疑簡訊 ➡️ AI 秒解讀風險 ➡️ 你的錢包安全了！
+Starting life in a new country is exciting, but it can also be overwhelming. Fraudsters often target international students with complex scams involving **ARC issues, tuition payments, or online shopping errors.**
 
-### ❤️ 2. 暖心陪伴引擎 (Empathy Core)
-被騙不是你的錯！當受害者感到無助時，E 友提供不帶批判的情緒支持，是你在數位世界最暖的朋友。
+**Anti-Fraud E-Friend (防詐 E 友)** is a warm, empathetic AI companion designed specifically for you. 
 
-### 🥋 3. 實戰演練道場 (Battle Mode)
-不敢掛詐騙電話？讓 E 友扮演詐騙集團，陪你進行高強度的「拒絕演練」，練就一身防詐金鐘罩！
-
-### 📚 4. 詐騙百科全書 (Knowledge Base)
-收錄最新、最陰險的詐騙手法，圖文並茂，讓你一眼識破敵人的劇本。
+*   **No Judgment**: Feel safe to ask anything, even if you think it might be a small mistake.
+*   **Always Awake**: Scammers don't sleep, and neither do we. Available 24/7, year-round.
+*   **Taiwan Smart**: Directly linked to the logic of Taiwan's **165 Anti-Fraud Hotline**.
 
 ---
 
-## 📸 應用展示 (Showcase)
+## 🔥 Key Features (核心功能)
 
-| 🛡️ 震撼首頁 | 💬 智能諮詢 |
-|:---:|:---:|
-| ![Home Demo](images/home_demo.png) | ![Chat Demo](images/chat_demo.png) |
-| *直覺、現代化的入口* | *Gemini 2.5 即時分析* |
+### 🕵️‍♂️ 1. Instant Message Analysis (即時訊息分析)
+Paste a suspicious text, WhatsApp, or Line message. Our AI (Gemini 2.5 Flash) breaks it down and reveals the "scam script" behind it in seconds.
 
----
+### 🛡️ 2. Cultural Context for Students (專為國際生設計)
+We understand scams that specifically target foreign residents:
+*   **Fake Immigration Bureau Calls** (Residency/Visa issues)
+*   **Overseas Remittance Scams**
+*   **ATM "Cancellation" Scams** (Popular in Taiwan e-commerce)
 
-## ⚡ 技術軍火庫 (Tech Stack)
+### 💬 3. Structured & Easy to Read (易讀的對話設計)
+No complicated legal jargon. Our AI provides clear **Risk Analysis**, **Action Plans**, and **Pro Tips** using professional yet easy-to-understand formatting.
 
-我們只用最快、最潮的技術：
-
-*   **Frontend**: [React 19](https://react.dev/) - 享受最新的 Hook 與編譯效能。
-*   **AI SDK**: [Google GenAI SDK](https://www.npmjs.com/package/@google/genai) - 直接與 Gemini 2.5 模型熱線通話。
-*   **Styling**: [Tailwind CSS](https://tailwindcss.com/) - 寫 CSS 也可以是一種享受。
-*   **Icons**: [Lucide React](https://lucide.dev/) - 質感與輕量的完美平衡。
-
----
-
-## 🚀 啟動與部署您的 AI Studio 應用程式
-
-這裡有您在自家電腦上運行 App 所需的一切寶貝！
-
-👀 **在 AI Studio 瞧瞧您的 App：** 
-[https://ai.studio/apps/drive/1ZoPjO1Dx4iW82YMP8dVWZJfMTLB5EEDR?fullscreenApplet=true](https://ai.studio/apps/drive/1ZoPjO1Dx4iW82YMP8dVWZJfMTLB5EEDR?fullscreenApplet=true)
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-
-### 💻 30秒在本機端極速啟動 (Quick Start)
-
-不要猶豫，現在就加入防詐的行列！
-
-### 1. 下載程式碼
-```bash
-git clone https://github.com/your-username/anti-fraud-efriend.git
-cd anti-fraud-efriend
-```
-
-### 2. 裝填彈藥 (API Key)
-這台跑車需要 **Gemini API Key** 才能發動。
-請確保環境變數中有 `API_KEY`，或在本地開發時設定。
-
-### 3. 發動引擎
-```bash
-npm install
-npm start
-```
-
-打開瀏覽器前往 `http://localhost:3000`，見證 AI 防詐的力量！
+### 🥋 4. Rejection Roleplay (拒絕演習)
+Not sure how to say "No" to a pushy scammer? Practice with the AI to build your confidence.
 
 ---
 
-## 🤝 加入戰隊 (Contributing)
+## 🌍 Multi-Language Support (多語系支援)
 
-覺得這個專案很熱血？想要貢獻你的程式碼？
-歡迎 **Pull Request** 或 **Open Issue**！讓我們一起用科技讓這個世界更安全。
+We speak your language! Access support in:
+*   🇹🇼 **Traditional Chinese** (繁體中文)
+*   🇺🇸 **English**
+*   🇨🇳 **Simplified Chinese** (简体中文)
+*   🇯🇵 **Japanese** (日本語)
+*   🇰🇷 **Korean** (한국어)
+*   🇻🇳 **Vietnamese** (Tiếng Việt)
+*   🇮🇩 **Indonesian** (Bahasa Indonesia)
+*   🇹🇭 **Thai** (ไทย)
+*   🇮🇳 **Hindi** (हिन्दी)
 
-**如果是兄弟，就一起來防詐！** 🤜🤛
+---
+
+## 🚀 Get Started (立即開始)
+
+1.  **Select Your Language**: Use the globe icon in the top right.
+2.  **Paste & Analyze**: Copy any suspicious text into the chat.
+3.  **Take Action**: Follow the AI's guide or call **165** immediately if you've shared personal info.
+
+---
+
+## ⚡ Technical Excellence (技術架構)
+
+*   **Core AI**: Google Gemini 2.5 Flash for low-latency, high-intelligence consultation.
+*   **UI/UX**: React 19 + Tailwind CSS, optimized for a "warm and professional" reading experience.
+*   **Security**: Real-time logic based on Taiwan National Police Agency (165) data.
+
+---
+
+## 🤝 For the Community (社群貢獻)
+
+We are committed to making Taiwan a safer place for global talent. If you have encountered a new type of scam, please share it through the chat to help train our E-Friend!
 
 ---
 
 <p align="center">
-  Made with ❤️ & ☕ by Anti-Fraud Developers
+  <strong>Stay Safe. Stay Informed. Your Taiwan journey starts with security.</strong><br>
+  Made with ❤️, ☕, and Gemini.
 </p>

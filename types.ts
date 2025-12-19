@@ -1,10 +1,13 @@
+
+export type Language = 'zh-TW' | 'en' | 'zh-CN' | 'ja' | 'ko' | 'vi' | 'id' | 'th' | 'hi';
+
 export interface FraudMethod {
   id: string;
-  title: string;
-  category: string;
-  description: string;
-  indicators: string[]; // Red flags
-  prevention: string[];
+  title: Record<Language, string>;
+  category: Record<Language, string>;
+  description: Record<Language, string>;
+  indicators: Record<Language, string[]>;
+  prevention: Record<Language, string[]>;
   icon: string;
 }
 
@@ -20,8 +23,8 @@ export type ViewState = 'home' | 'library' | 'chat' | 'quiz';
 
 export interface QuizQuestion {
   id: number;
-  scenario: string;
-  options: string[];
+  scenario: Record<Language, string>;
+  options: Record<Language, string[]>;
   correctIndex: number;
-  explanation: string;
+  explanation: Record<Language, string>;
 }
