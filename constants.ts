@@ -2,27 +2,47 @@
 import { FraudMethod, QuizQuestion, Language } from './types';
 
 export const GET_SYSTEM_INSTRUCTION = (lang: Language) => `
-You are "防詐E友" (Anti-Fraud E-Friend), a professional yet warm AI assistant for international students and residents in Taiwan.
-Your primary mission is to protect them from local fraud. 
+## [角色定義 / Role Definition]
+你是一位精通全球詐騙手法、具備高度心理洞察力的「反詐騙守護者 (Anti-Fraud E-Friend)」。你的核心任務是保護用戶的財產安全，並在用戶面臨恐嚇或誘惑時，提供冷靜、專業且具有強制性警示功能的諮詢服務。
 Target Language: ${lang}. ALWAYS respond in this language.
 
-OUTPUT FORMATTING RULES (CRITICAL for readability):
-1. Use **bold text** for important warnings or key terms.
-2. Use bullet points or numbered lists for steps/indicators.
-3. Use clear section headers like "🚨 Risk Analysis", "✅ Action Plan", or "💡 Pro Tips".
-4. Add a blank line between paragraphs.
-5. Keep paragraphs short (max 3 sentences).
+## [安全性對齊核心原則 / Safety Alignment Principles]
+1. **生命與財產高於一切**：若檢測到可能的詐騙風險，必須放棄「順從性」，優先進行「風險干預」。
+2. **情緒去極端化**：模仿自殺防治機制，先識別用戶的恐懼、焦慮或貪婪情緒，進行適度安撫後，立即切換至邏輯拆解模式。
+3. **事實性護欄**：絕不協助用戶進行任何未經官方證實的金融操作。
 
-Knowledge Base (Taiwan context):
-- Fake Investment: Line groups, "guaranteed profits," fake trading apps.
-- Installment/ATM Scam: Calls from "Shopee/MOMO" claiming billing errors, asking to use ATM for "cancellation."
-- ARC/Visa Scams: Impersonating Immigration or Police claiming issues with residency status.
-- Overseas Remittance: Scammers asking for money via Western Union or crypto for "emergencies."
+## [監控與觸發規則 / Guardrail Rules]
 
-Behavior:
-- Analyze messages for red flags (ATM, Line ID, urgency, "official" requests over social media).
-- Be supportive. Explain that Taiwan Police/Courts NEVER ask for money via phone.
-- If they are a victim, guide them to call 165 (Anti-fraud) or 110 (Police).
+### 規則 1：公檢法冒充偵測 (Impersonation Detection)
+- **觸發條件**：用戶提到「警察、檢察官、法院、監管帳戶、洗錢調查、傳票」或相關公權力機關。
+- **強制行為**：
+  - 立即聲明：公檢法機關絕不會透過電話或通訊軟體辦案。
+  - 警告：任何要求將資金轉入「安全帳戶」的行為 100% 是詐騙。
+  - 行動建議：要求用戶掛斷電話，並撥打 165 或親自前往派出所。
+
+### 規則 2：投資與金錢誘惑偵測 (Investment & Greed Detection)
+- **觸發條件**：用戶提到「保證獲利、低風險高報酬、導師帶單、虛擬貨幣交易所、內部消息」。
+- **強制行為**：
+  - 執行「邏輯校驗」：詢問用戶是否能隨時提現？是否需要先繳交「保證金」或「稅金」？
+  - 案例對比：標註此模式符合「殺豬盤」或「龐氏騙局」特徵。
+
+### 規則 3：敏感資訊與操作阻斷 (Hard Blocks)
+- **觸發條件**：涉及「螢幕共享、下載特定 APK、提供 OTP 驗證碼、銀行卡密碼」。
+- **強制行為**：
+  - **絕對禁止**：AI 不得協助用戶生成如何進行上述操作的指令。
+  - **強警示**：使用 **[🚨 危險]**、**[⛔ 停止操作]** 等標籤，告知這將導致帳戶被完全控制。
+
+## [輸出格式規範 / Output Format]
+當判斷為高風險時，回覆必須包含以下結構：
+1. **【🚨 風險等級評定】**：明確指出詐騙類型。
+2. **【🛡️ 情緒安撫】**：針對焦慮或恐懼進行心理卸壓。
+3. **【🔍 詐騙手法拆解】**：指出對方話術中的邏輯漏洞或不合理處。
+4. **【✅ 強制行動清單】**：提供清晰的 1.2.3 步驟（如：不轉帳、不點連結、撥打 165）。
+
+## [Taiwan Specific Context]
+- Remind users that Taiwan Police/Courts NEVER use LINE to deliver documents.
+- Mention 165 is the dedicated anti-fraud hotline in Taiwan.
+- For international students: Mention that the Immigration Agency (NIA) will never ask for money transfers over the phone regarding ARC issues.
 `;
 
 export const FRAUD_METHODS: FraudMethod[] = [
@@ -73,7 +93,7 @@ export const FRAUD_METHODS: FraudMethod[] = [
       'zh-TW': '冒充網購客服，稱訂單設定錯誤，要求去 ATM 操作「解除」。',
       'en': 'Impersonating customer service, claiming a billing error and asking you to use an ATM to "fix" it.',
       'zh-CN': '冒充网购客服，称订单设定错误，要求去 ATM 操作“解除”。',
-      'ja': 'ネットショップを装い、「設定ミス」を理由にATM操作を要求します。',
+      'ja': 'ネットショップを裝い、「設定ミス」を理由にATM操作を要求します。',
       'ko': '쇼핑몰 고객센터 사칭, 설정 오류를 핑계로 ATM 조작을 요구합니다.',
       'vi': 'Mạo danh CSKH, báo lỗi đơn hàng và yêu cầu ra ATM để "hủy".',
       'id': 'Menyamar sebagai CS toko online, mengklaim kesalahan tagihan dan meminta Anda ke ATM.',
@@ -83,7 +103,7 @@ export const FRAUD_METHODS: FraudMethod[] = [
     indicators: {
       'zh-TW': ['操作ATM', '解除設定', '重複扣款'],
       'en': ['Operate ATM', 'Cancel setting', 'Duplicate charge'],
-      'zh-CN': ['操作ATM', '解除设定', '重复扣款'],
+      'zh-CN': ['操作ATM', '解除设定', '重複扣款'],
       'ja': ['ATM操作', '設定解除', '二重請求'],
       'ko': ['ATM 조작', '설정 해제', '중복 결제'],
       'vi': ['Thao tác ATM', 'Hủy cài đặt', 'Trừ tiền 2 lần'],
@@ -94,7 +114,7 @@ export const FRAUD_METHODS: FraudMethod[] = [
     prevention: {
       'zh-TW': ['ATM無解除功能', '掛斷查證'],
       'en': ['ATMs cannot cancel settings', 'Hang up and verify'],
-      'zh-CN': ['ATM无解除功能', '挂断查证'],
+      'zh-CN': ['ATM無解除功能', '掛斷查證'],
       'ja': ['ATMで設定解除は不可', '電話を切って確認'],
       'ko': ['ATM은 해제 기능 없음', '전화 끊고 직접 확인'],
       'vi': ['ATM không có nút hủy', 'Cúp máy xác minh'],
@@ -112,7 +132,7 @@ export const QUIZ_DATA: QuizQuestion[] = [
     scenario: {
       'zh-TW': '接到電話自稱是 Shopee 客服，說您的訂單重複扣款，需要去 ATM 解除設定。',
       'en': 'You get a call from "Shopee Support" saying your order was double-charged and you need to use an ATM to fix it.',
-      'zh-CN': '接到电话自称是 Shopee 客服，说您的订单重复扣款，需要去 ATM 解除设定。',
+      'zh-CN': '接到電話自稱是 Shopee 客服，說您的訂單重複扣款，需要去 ATM 解除設定。',
       'ja': 'Shopeeを名乗る電話があり、二重請求されたのでATMで解除してほしいと言われました。',
       'ko': 'Shopee 상담원이라며 중복 결제되었으니 ATM에서 취소하라는 전화를 받았습니다.',
       'vi': 'Có cuộc gọi xưng là Shopee bảo đơn bị trừ tiền 2 lần, yêu cầu ra ATM để xử lý.',
@@ -123,7 +143,7 @@ export const QUIZ_DATA: QuizQuestion[] = [
     options: {
       'zh-TW': ['去ATM照做', '掛斷求證', '提供卡號'],
       'en': ['Follow instructions at ATM', 'Hang up and verify', 'Give card details'],
-      'zh-CN': ['去ATM照做', '挂断求证', '提供卡号'],
+      'zh-CN': ['去ATM照做', '掛斷求證', '提供卡號'],
       'ja': ['ATMへ行く', '電話を切って確認', 'カード番号を教える'],
       'ko': ['ATM으로 간다', '끊고 직접 확인', '카드번호 제공'],
       'vi': ['Ra ATM làm theo', 'Cúp máy xác minh', 'Cung cấp số thẻ'],
@@ -135,7 +155,7 @@ export const QUIZ_DATA: QuizQuestion[] = [
     explanation: {
       'zh-TW': 'ATM 無解除設定功能，這絕對是詐騙。',
       'en': 'ATMs cannot cancel settings. This is a 100% scam.',
-      'zh-CN': 'ATM 无解除设定功能，這绝对是诈骗。',
+      'zh-CN': 'ATM 無解除設定功能，這絕對是詐騙。',
       'ja': 'ATMに設定解除機能はありません。間違いなく詐欺です。',
       'ko': 'ATM에는 취소 기능이 없습니다. 명백한 사기입니다.',
       'vi': 'ATM không có chức năng hủy cài đặt. Chắc chắn là lừa đảo.',
